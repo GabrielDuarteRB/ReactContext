@@ -1,15 +1,19 @@
-import { useContext } from "react"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../../context/auth"
+import { apiDBC } from "../../api"
 
 const Address = () => {
 
-  const {logged} = useContext(AuthContext)
-  const navigate = useNavigate()
+  const setup = async () => {
+    try {
+      const {data} = await apiDBC.get('/pessoa?pagina=0&tamanhoDasPaginas=20')
+      console.log(data)
+    } catch (error) {
+      console.log(error)      
+    }
+  }
 
   useEffect(() => {
-    !logged && navigate('/')
+    setup()
   }, [])
 
   return (

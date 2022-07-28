@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/authProvider';
 import { Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import { apiCEP } from '../../api';
@@ -16,7 +16,7 @@ const SignupSchema = Yup.object().shape({
     .max(50, 'Too Long!')
     .required('Required'),
   cep: Yup.string()
-    .min(2, 'Too Short!')
+    .min(7, 'Too Short!')
     .max(8, 'Too Long!')
     .required('Required'),
   logradouro: Yup.string().min(2, 'Too Short!').required('Required'),
@@ -90,14 +90,11 @@ const Usuario = () => {
           senha: '',
           cep: '',
           logradouro: '',
+          numero: '',
           complemento: '',
           bairro: '',
           localidade: '',
           uf: '',
-          ibge: '',
-          gia: '',
-          ddd: '',
-          siafi: ''
         }}
         validationSchema={SignupSchema}
         onSubmit={values => handleSingUp(values)}
@@ -148,6 +145,12 @@ const Usuario = () => {
                   <div><Toaster>{wrong(`logradouro error => ${errors.logradouro}`)}</Toaster></div>
                 ) : null}
 
+                <label htmlFor='numero'>Número</label>
+                <Field name="numero"/>
+                {errors.numero && touched.numero ? (
+                  <div><Toaster>{wrong(`numero error => ${errors.numero}`)}</Toaster></div>
+                ) : null}
+
                 <label htmlFor='complemento'>complemento</label>
                 <Field name="complemento"/>
                 {errors.complemento && touched.complemento ? (
@@ -160,7 +163,7 @@ const Usuario = () => {
                   <div><Toaster>{wrong(`bairro error => ${errors.bairro}`)}</Toaster></div>
                 ) : null}
 
-                <label htmlFor='localidade'>Localidade</label>
+                <label htmlFor='localidade'>Municipio</label>
                 <Field name="localidade"/>
                 {errors.localidade && touched.localidade ? ( 
                   <div><Toaster>{wrong(`localidade error => ${errors.localidade}`)}</Toaster></div>
@@ -170,31 +173,7 @@ const Usuario = () => {
                 <Field name="uf"/>
                 {errors.uf && touched.uf ? ( 
                   <div><Toaster>{wrong(`uf error => ${errors.uf}`)}</Toaster></div>
-                ) : null}
-
-                <label htmlFor='ibge'>ibge</label>
-                <Field name="ibge"/>
-                {errors.ibge && touched.ibge ? ( 
-                  <div><Toaster>{wrong(`ibge error => ${errors.ibge}`)}</Toaster></div>
-                ) : null}
-
-                <label htmlFor='gia'>gia</label>
-                <Field name="gia"/>
-                {errors.gia && touched.gia ? ( 
-                  <div><Toaster>{wrong(`gia error => ${errors.gia}`)}</Toaster></div>
-                ) : null}
-                
-                <label htmlFor='ddd'>ddd</label>
-                <Field name="ddd"/>
-                {errors.ddd && touched.ddd ? ( 
-                  <div><Toaster>{wrong(`ddd error => ${errors.ddd}`)}</Toaster></div>
-                ) : null}
-
-                <label htmlFor='siafi'>siafi</label>
-                <Field name="siafi"/>
-                {errors.siafi && touched.siafi ? ( 
-                  <div><Toaster>{wrong(`Siafi error => ${errors.siafi}`)}</Toaster></div>
-                ) : null}
+                ) : null} 
 
               </div>
               <button type='submit'>Submit</button>

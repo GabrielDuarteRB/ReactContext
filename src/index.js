@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import AuthProvider from './context/authProvider';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Router from './rounter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Router />
+    <AuthProvider>
+        <Router />
+    </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

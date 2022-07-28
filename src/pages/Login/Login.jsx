@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import { useContext } from 'react';
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/authProvider';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -15,6 +15,8 @@ const SignupSchema = Yup.object().shape({
 })
 
 const Login = () => {
+
+  
 
 
   const {handleLogin} = useContext(AuthContext)

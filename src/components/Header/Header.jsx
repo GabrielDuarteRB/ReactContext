@@ -1,17 +1,17 @@
 import { useContext } from "react"
-import { AuthContext } from "../../context/auth"
+import { AuthContext } from "../../context/authProvider"
 import Imagem from "../Imagem/Imagem"
 import Menu from "../Menu/Menu"
 
 const Header = () => {
-  const {handleLogout, logged} = useContext(AuthContext)
+  const {handleLogout, auth} = useContext(AuthContext)
 
   return (
     <header>
         <Imagem fontsize={'30px'}/>
         <Menu />
         {
-            logged && <button onClick={handleLogout}>Sair</button>
+            auth && <button onClick={handleLogout}>Sair</button>
         }
         
     </header>

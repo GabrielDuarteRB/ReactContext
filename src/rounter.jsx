@@ -15,20 +15,20 @@ const Router = () => {
 
   return (
   <BrowserRouter>
-    <Header />
+    {/* <Header /> */}
     <Routes>
       {
         !auth ? (
           <>
-            <Route path='/' element={<Login />}/>
+            <Route path='' element={<Login />}/>
             <Route path='/usuario' element={<Usuario />}/>
           </>
         )
         :
-       ( <>
+        <>
           <Route path='/endereco' element={<Address />}/>
           <Route path='/pessoas' element={<People />}/>
-        </>)
+        </>
       }
       {/* <Route path='*' element={<NotFound/>} /> */}
     </Routes>

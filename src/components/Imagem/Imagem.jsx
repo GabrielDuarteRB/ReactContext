@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
-import { FaHireAHelper } from "react-icons/fa";
+import { FaQq } from "react-icons/fa";
 
-
-const Imagem = ({fontsize}) => {
+const Imagem = ({fontsize , teste}) => {
   return (
     <Link to='/'>
-        <FaHireAHelper
+        <FaQq
             style={{
                 fontSize: fontsize
             }}

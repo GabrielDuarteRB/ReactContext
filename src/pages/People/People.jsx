@@ -6,6 +6,7 @@ import MaskedInput from "react-text-mask";
 import { updatePerson, addPerson, deletePerson} from "./PeopleCrud";
 import Modal from 'react-modal';
 import moment from 'moment';
+import Header from "../../components/Header/Header";
 
 const People = () => {
 
@@ -83,7 +84,23 @@ const People = () => {
       .max(50, 'Too Long!'),
     cpf: Yup.string()
       .length(14, 'Cpf tem que conter 11 números'),
-    dataNascimento: Yup.date('Data inválida')
+    dataNascimento: Yup.string().test('is underage', 'You are underage', (data) => {
+      let date = new Date(data)
+      const today = new Date()
+      
+      if (date.getDate > 31 || date.getDate < 1){
+        return 'Dia menor que zero ou maior que trinta e um'
+      }
+
+      if (date.getMonth() > 12 || date.getMonth() < 1){
+        console.log('teste')
+        return 'Mês tem que estar entre zero e doze'
+      }
+
+      if (date.getFullYear() > today.getFullYear()){
+        return 'Ano superior ao atual'
+      }
+    })
     
   })
 
@@ -93,6 +110,7 @@ const People = () => {
 
   return (
     <>
+      <Header/>
       { 
       add || update
       ?
@@ -118,6 +136,9 @@ const People = () => {
              onChange={handleChange}
              value={values.nome}
              />
+             {errors.nome && touched.nome ?(   
+                  alert('nome incorreto')
+            ) : null}
             <Field name='dataNascimento'>
             {field => (
               <MaskedInput
@@ -131,8 +152,8 @@ const People = () => {
               />
             )} 
             </Field>
-            {errors.nome && touched.nome ?(   
-                  alert('nome incorreto')
+            {errors.dataNascimento && touched.dataNascimento ?(   
+                  alert('erro')
             ) : null}
             <Field name='cpf'>
               {field => (

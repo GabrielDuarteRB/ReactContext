@@ -12,8 +12,7 @@ const Header = () => {
         <Menu />
         {
             auth && <button onClick={handleLogout}>Sair</button>
-        }
-        
+        } 
     </header>
   )
 }

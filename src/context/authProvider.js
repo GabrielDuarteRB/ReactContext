@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { createContext } from "react"
 import { apiDBC } from '../api' 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const AuthContext = createContext()
 
@@ -35,7 +37,7 @@ const AuthProvider = ({children}) => {
       window.location.href = '/pessoas'
       setAuth(true)
     } catch (error) {
-      console.log(error)
+      toast.error('Deu Ruim')
     }
   }
 

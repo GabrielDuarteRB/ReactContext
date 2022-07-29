@@ -5,13 +5,35 @@ import {FaEllipsisV} from 'react-icons/fa'
 import moment from 'moment'
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button"
+// import { customStyles } from "../Modal/Modal"
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  butoes: {
+    display: 'flex',
+    alignItens: 'center',
+    justifyContent: 'space-around',
+    paddingTop: '16px'
+  }
+};
 
 const List = () => {
   
-  const {handleGet} = useContext(PeopleContext)
+  const {handleGet, handleDelete} = useContext(PeopleContext)
   const [visivel, setVisivel] = useState(false)
   const [pessoas, setPessoas] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [idPessoa, setIdPessoa] = useState('')
   const navigate = useNavigate()
 
   const handleUpdate = (pessoa) => {  
@@ -23,13 +45,27 @@ const List = () => {
     setPessoas(getPessoas)
   }
 
+  const openModal = (id) => {
+    setModalIsOpen(true)
+    setIdPessoa(id)
+  }
+  
+  const deletar = (idPessoa, setModalIsOpen) => {
+    handleDelete(idPessoa, setModalIsOpen)
+    handleGetPessoas()
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
   const visibilidade = () => {
     visivel ? setVisivel(false) : setVisivel(true)
   }
  
   useEffect(() => {
     handleGetPessoas()
-  }, [])
+  }, [pessoas])
 
   return (
     
@@ -51,7 +87,8 @@ const List = () => {
                       ?
                       (<>
                       <Button backgroundColor='yellow' type="button" onClick={() => handleUpdate(pessoa)}>Atualizar</Button>
-                      <Button backgroundColor='red' type="button" onClick={() => setModalIsOpen(true)}>Excluir</Button></>)
+                      <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button></>)
+                      
                       :
                       null
                     }
@@ -59,6 +96,18 @@ const List = () => {
                   </Buttons >
               </Lista>
           ))}
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+            >
+              <div>Tem certeza que deseja excluir?</div>
+              <div style={customStyles.butoes}>
+                <button onClick={() => deletar(idPessoa, setModalIsOpen)}>Sim</button>
+                <button onClick={closeModal}>Não</button>
+              </div>
+          </Modal>
       </Pessoas>
    
   )

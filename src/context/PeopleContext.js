@@ -71,8 +71,8 @@ const PeopleProvider = ({children}) => {
         }
     }
     
-    const handleDelete = async (id, setIsOpen) => {
-        setIsOpen(false)
+    const handleDelete = async (id, setModalIsOpen) => {
+        setModalIsOpen(false)
         try {
             await apiDBC.delete(`/pessoa/${id}`)
         } catch (error) {

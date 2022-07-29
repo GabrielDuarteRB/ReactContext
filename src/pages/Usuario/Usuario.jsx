@@ -1,20 +1,9 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/authProvider';
 import { Field, Form, Formik} from 'formik';
-import * as Yup from 'yup'; 
 import {ToastContainer} from 'react-toastify';
-import { toastError, toastSucess } from '../../components/Toast/Toast';
-
-const SignupSchema = Yup.object().shape({
-  login: Yup.string()
-    .min(2, 'Nome muito curto!')
-    .max(50, 'Nome muito longo!')
-    .required('Nome obrigatório!'),
-  senha: Yup.string()
-    .min(2, 'Senha muito curta!')
-    .max(50, 'Senha muito longa!')
-    .required('Senha obrigatoria!'),
-})
+import { toastError} from '../../components/Toast/Toast';
+import { ValidationSignup } from '../../utils/ValidationsForm/ValidationsForm';
 
 const Usuario = () => {
 
@@ -33,7 +22,7 @@ const Usuario = () => {
           login: '',
           senha: '',
         }}
-        validationSchema={SignupSchema}
+        validationSchema={ValidationSignup}
         onSubmit={values =>  handleSingUp(values)}
       >
         

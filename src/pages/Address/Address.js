@@ -1,22 +1,10 @@
 import { Field, Form, Formik } from "formik"
 import MaskedInput from "react-text-mask";
-import * as Yup from 'yup';
 import { apiCEP } from "../../api";
 import { maskCEP } from "../../utils/masked";
+import { ValidationAddress } from "../../utils/ValidationsForm/ValidationsForm";
 
 const Address = () => {
-
-  const SignupSchema = Yup.object().shape({
-    cep: Yup.string()
-      .min(7, 'Too Short!')
-      .max(8, 'Too Long!')
-      .required('Required'),
-    logradouro: Yup.string().min(2, 'Too Short!').required('Required'),
-    complemento: Yup.string().min(2, 'Too Short!').required('Required'),
-    bairro: Yup.string().min(2, 'Too Short!').required('Required'),
-    localidade: Yup.string().min(2, 'Too Short!').required('Required'),
-    uf: Yup.string().min(2, 'Too Short!').required('Required'),
-  })
 
   const validationCEP = async (event, setFieldValue) => {
     const cep = event.target.value?.replace(/[^0-9]/g, '')
@@ -54,7 +42,7 @@ const Address = () => {
           localidade: '',
           uf: '',
         }}
-        validationSchema={SignupSchema}
+        validationSchema={ValidationAddress}
         onSubmit={values => console.log(values)}
       >
         

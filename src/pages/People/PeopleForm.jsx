@@ -1,5 +1,5 @@
 import { Field, Formik, Form} from 'formik';
-import * as Yup from 'yup';
+
 import MaskedInput from "react-text-mask";
 import { useParams } from 'react-router-dom';
 import { maskCPF, maskData } from '../../utils/masked';
@@ -8,7 +8,8 @@ import { PeopleContext } from '../../context/PeopleContext';
 import { ToastContainer } from 'react-toastify';
 import { toastError } from '../../components/Toast/Toast';
 import moment from 'moment';
-import {cpf} from 'cpf-cnpj-validator'
+import { ValidationCreate } from '../../utils/ValidationsForm/ValidationsForm';
+
 
 const PeopleForm = () => {
 
@@ -20,22 +21,6 @@ const PeopleForm = () => {
   const api = async () => {
     getPersonById(id)
   }
-
-  const RegisterSchema = Yup.object().shape({
-      nome: Yup.string()
-        .min(2, 'Nome muito curto!')
-        .max(50, 'Nome muito longo!')
-        .required('Nome obrigatorio!'),
-      cpf: Yup.string()
-      .test('CPFValidation', 'Cpf inválida',(value) => cpf.isValid(value))
-      .required('Cpf obrigatório'),
-      email: Yup.string()
-        .email('Email inválido!')
-        .required('Email obrigatório!'),
-      dataNascimento: Yup.string()
-      .test('DateValidation', 'Data inválida', (value) => moment(value).isValid())
-      .required('Data obrigatória'),
-  })
 
   const buttonSubmit = (error) => {
     toastError(error.nome)
@@ -80,7 +65,7 @@ const PeopleForm = () => {
               }
               id ? handleUpdate(newValues, id) : handleCreate(newValues)
             }}
-            validationSchema={RegisterSchema}
+            validationSchema={ValidationCreate}
         >
         {({ handleChange, values, errors}) => ( 
           <Form>

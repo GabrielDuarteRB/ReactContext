@@ -23,8 +23,10 @@ const People = () => {
     <Tela>
       <Aside />
       <div>
+        <div>
+          <button type="button" onClick={() => handleCreate()}>Adicionar</button>
+        </div>
         <List /> 
-        <button type="button" onClick={() => handleCreate()}>Adicionar</button>
       </div>
       <ToastContainer />
     </Tela>

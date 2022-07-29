@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from 'formik';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/authProvider';
 import { Card, LoginDiv, TextoPequeno, SubTitulo, Titulo, Label, Input, Campo, Button, Password, Azul } from './Login.styled';
 import Imagem from '../../components/Imagem/Imagem';
@@ -10,14 +10,14 @@ import { ToastContainer } from 'react-toastify';
 const Login = () => {
 
   const {handleLogin} = useContext(AuthContext)
+  const [type, setType] = useState('password')
 
   const viewPassword = () => {
-    const type = document.getElementById("senha").type
     if (type === 'password') {
-      document.getElementById("senha").type = 'text'
+      setType('text')
       return
     }
-    document.getElementById("senha").type = 'password'
+    setType('password')
   }
   
   return (
@@ -49,7 +49,7 @@ const Login = () => {
                     <Label htmlFor='senha'>PASSWORD </Label>
                     <TextoPequeno small>Forgot Password</TextoPequeno>
                   </Password>
-                  <Field id='senha' name="senha" type="password" placeholder='password' />
+                  <Field name="senha" type={type} placeholder='password' />
                   <TextoPequeno small><FaEye onClick={viewPassword}/></TextoPequeno>
                 </Campo>
                 <ToastContainer />

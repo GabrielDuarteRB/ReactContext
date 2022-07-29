@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
 
-const Item = ({name, url}) => {
+const Item = ({name, url, icone}) => {
   return (
-    <li><Link to={url}>{name}</Link></li>
+    <>
+      
+      <Link to={url}><li>{name}</li></Link>
+    </>
   )
 }
 export default Item

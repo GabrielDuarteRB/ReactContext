@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/authProvider';
 import { Card, LoginDiv, TextoPequeno, SubTitulo, Titulo, Label, Input, Campo, Button, Password, Azul } from './Login.styled';
 import Imagem from '../../components/Imagem/Imagem';
-import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -22,7 +21,7 @@ const Login = () => {
             login: '',
             senha: '',
           }}
-          onSubmit={values => console.log(values)}
+          onSubmit={values => handleLogin(values)}
         >
           
           {({errors, touched}) => (
@@ -31,7 +30,7 @@ const Login = () => {
                   <div>
                     <Label htmlFor='login'>EMAIL</Label>
                   </div>
-                  <Input name="login" placeholder='Email address'/>
+                  <Field name="login" placeholder='Email address'/>
                   { errors.login && touched.login ? ( 
                     <div>{errors.login}</div>
                   ) : null}
@@ -42,7 +41,7 @@ const Login = () => {
                     <Label htmlFor='senha'>PASSWORD</Label>
                     <TextoPequeno small>Forgot Password</TextoPequeno>
                   </Password>
-                  <Input name="senha" type="password" placeholder='password'/>
+                  <Field name="senha" type="password" placeholder='password'/>
                   {errors.senha && touched.senha ? ( 
                     <div>{errors.senha}</div>
                   ) : null}

@@ -7,9 +7,11 @@ import Router from './rounter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <AuthProvider>
-        <Router />
-    </AuthProvider>
+    
+        <AuthProvider>
+            <Router />
+        </AuthProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

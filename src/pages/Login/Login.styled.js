@@ -52,22 +52,21 @@ export const Label = styled.label `
     font-weight: 700;
 `
 
-export const Input = styled.input `
-    background: #FCFDFE;
-    border: 1px solid #F0F1F7;
-    border-radius: 8px;
-    height:42px ;
-    padding-left: 16px;
-    margin-top: 8px;
-    width: 316px ;
-    &::placeholder {
-        color: #4B506D;
-        opacity: 0.4;
-    }
-` 
-
 export const Campo = styled.div `
     margin-bottom: 24px ;
+    &>input {
+        background: #FCFDFE;
+        border: 1px solid #F0F1F7;
+        border-radius: 8px;
+        height:42px ;
+        padding-left: 16px;
+        margin-top: 8px;
+        width: 316px ;
+        &::placeholder {
+            color: #4B506D;
+            opacity: 0.4;
+        }
+    }
 `
 
 export const Password = styled.div `

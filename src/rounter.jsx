@@ -12,7 +12,7 @@ import PeopleProvider from "./context/PeopleContext";
 const Router = () => {
 
   const {auth} = useContext(AuthContext)
-  console.log(auth  )
+  console.log(auth)
 
   return (
   <BrowserRouter>
@@ -22,7 +22,7 @@ const Router = () => {
         {
           !auth ? (
             <>
-              <Route path='' element={<Login />}/>
+              <Route path='/' element={<Login />}/>
               <Route path='/usuario' element={<Usuario />}/>
             </>
           )

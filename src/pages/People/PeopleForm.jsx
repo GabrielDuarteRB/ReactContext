@@ -6,6 +6,8 @@ import { maskCPF, maskData } from '../../utils/masked';
 import { useContext, useEffect, useState } from 'react';
 import { PeopleContext } from '../../context/PeopleContext';
 import { apiDBC } from '../../api';
+import { ToastContainer } from 'react-toastify';
+import { toastError } from '../../components/Toast/Toast';
 
 const PeopleForm = () => {
 
@@ -24,11 +26,22 @@ const PeopleForm = () => {
 
   const RegisterSchema = Yup.object().shape({
       nome: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!'),
-      cpf: Yup.string()
-        .length(14, 'Cpf tem que conter 11 números'), 
+        .min(2, 'Nome muito curto!')
+        .max(50, 'Nome muito longo!')
+        .required('Nome obrigatorio!'),
+      cpf: Yup.string().required('Cpf obrigatório'),
+      email: Yup.string()
+        .email('Email inválido!')
+        .required('Email obrigatório!'),
+      dataNascimento: Yup.string().required('Data obrigatória'),
   })
+
+  const buttonSubmit = (error) => {
+    toastError(error.nome)
+    toastError(error.cpf)
+    toastError(error.email)
+    toastError(error.dataNascimento)
+  }
 
   useEffect(() => {
     if(id){
@@ -50,7 +63,7 @@ const PeopleForm = () => {
             onSubmit={(values) => id ? handleUpdate(values, id) : handleCreate(values)}
             validationSchema={RegisterSchema}
         >
-        {({ handleChange, values }) => ( 
+        {({ handleChange, values, errors}) => ( 
           <Form>
             <Field
              id="nome"
@@ -94,10 +107,11 @@ const PeopleForm = () => {
             placeholder='email' 
             value={values.email} 
             onChange={handleChange}/>
-            <button type="submit">{id ? 'Atualizar' : 'Criar'}</button>
-            </Form>
+            <button onClick={() => buttonSubmit(errors)} type="submit">{id ? 'Atualizar' : 'Criar'}</button>
+          </Form>
         )}
         </Formik>
+        <ToastContainer />
     </>
   )
 }

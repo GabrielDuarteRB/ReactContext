@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { createContext } from "react"
 import { apiDBC } from '../api' 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toastError } from "../components/Toast/Toast"
 
 export const AuthContext = createContext()
 
@@ -23,8 +22,8 @@ const AuthProvider = ({children}) => {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
     apiDBC.defaults.headers.common['Authorization'] = undefined
+    localStorage.removeItem('token')
     setAuth(false)
     window.location.href = '/'
   }
@@ -37,7 +36,7 @@ const AuthProvider = ({children}) => {
       window.location.href = '/pessoas'
       setAuth(true)
     } catch (error) {
-      toast.error('Deu Ruim')
+      toastError('login ou senha inválidos!')
     }
   }
 

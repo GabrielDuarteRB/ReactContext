@@ -5,27 +5,10 @@ import {FaEllipsisV} from 'react-icons/fa'
 import moment from 'moment'
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button"
-// import { customStyles } from "../Modal/Modal"
+import { customStyles } from "../Modal/Modal"
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  butoes: {
-    display: 'flex',
-    alignItens: 'center',
-    justifyContent: 'space-around',
-    paddingTop: '16px'
-  }
-};
 
 const List = () => {
   
@@ -87,8 +70,8 @@ const List = () => {
                       ?
                       (<>
                       <Button backgroundColor='yellow' type="button" onClick={() => handleUpdate(pessoa)}>Atualizar</Button>
-                      <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button></>)
-                      
+                      <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button>
+                      </>)
                       :
                       null
                     }

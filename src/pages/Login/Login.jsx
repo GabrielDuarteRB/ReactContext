@@ -4,11 +4,12 @@ import { AuthContext } from '../../context/authProvider';
 import { Card, LoginDiv, TextoPequeno, SubTitulo, Titulo, Label, Input, Campo, Button, Password, Azul } from './Login.styled';
 import Imagem from '../../components/Imagem/Imagem';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const Login = () => {
 
   const {handleLogin} = useContext(AuthContext)
-
+  
   return (
     <LoginDiv>
       <Card>
@@ -24,16 +25,13 @@ const Login = () => {
           onSubmit={values => handleLogin(values)}
         >
           
-          {({errors, touched}) => (
+          {() => (
               <Form>
                 <Campo>
                   <div>
                     <Label htmlFor='login'>EMAIL</Label>
                   </div>
                   <Field name="login" placeholder='Email address'/>
-                  { errors.login && touched.login ? ( 
-                    <div>{errors.login}</div>
-                  ) : null}
                 </Campo>
 
                 <Campo>
@@ -42,11 +40,8 @@ const Login = () => {
                     <TextoPequeno small>Forgot Password</TextoPequeno>
                   </Password>
                   <Field name="senha" type="password" placeholder='password'/>
-                  {errors.senha && touched.senha ? ( 
-                    <div>{errors.senha}</div>
-                  ) : null}
                 </Campo>
-                
+                <ToastContainer />
                 <Button type='submit'>Log In</Button>
               </Form>
           )}

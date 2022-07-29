@@ -7,6 +7,6 @@ export const Button = styled.button(({backgroundColor, width, height}) => ({
     color: 'black',
     cursor: 'pointer',
     fontWeight: 'bold',
-    height: height ? height : 40,
+    height: height ? height : 25,
     width: width ? width : 150,
 }));

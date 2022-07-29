@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiDBC } from "../api";
+import { toastError, toastSucess } from "../components/Toast/Toast";
 
 export const PeopleContext = createContext()
 
@@ -10,17 +11,19 @@ const PeopleProvider = ({children}) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        handleGet()
+        // handleGet()
         setLoading(false)
     }, [])
 
     const conversorCPF = (cpf) => {
         cpf = cpf.replaceAll('.', '')
+        cpf = cpf.replaceAll('_', '')
         cpf = cpf.replace('-', '')
         return cpf
     }
     
     const conversorData = (data) => {
+        data = data.replaceAll('_', '')
         data = data.split('/')
         data = `${data[2]}-${data[1]}-${data[0]}`
         return data
@@ -48,9 +51,17 @@ const PeopleProvider = ({children}) => {
             'email': values.email,
             })
             navigate('/pessoas')
-            console.log('atualizou')
+            toastSucess('Usuário atualizado com sucesso')
         } catch (error) {
-            alert(error);
+            if(data.length !== 10) {
+                toastError('Data incorreto')
+                return
+            }
+            if(cpf.length !== 11) {
+                toastError('Cpf incorreto!')
+                return
+            }
+            toastError('Ocorreu um erro')            
         }
     }
     
@@ -66,8 +77,17 @@ const PeopleProvider = ({children}) => {
                 'email': values.email
             })
             navigate('/pessoas')
+            toastSucess('Usuário criado com sucesso')
         } catch (error) {
-            alert(error);
+            if(data.length !== 10) {
+                toastError('Data incorreto')
+                return
+            }
+            if(cpf.length !== 11) {
+                toastError('Cpf incorreto!')
+                return
+            }
+            toastError('Ocorreu um erro')
         }
     }
     
@@ -75,8 +95,9 @@ const PeopleProvider = ({children}) => {
         setModalIsOpen(false)
         try {
             await apiDBC.delete(`/pessoa/${id}`)
+            toastSucess('Usuário deletado com sucesso')
         } catch (error) {
-            alert(error);
+            toastError('Ocorreu um erro')
         }
     }
 

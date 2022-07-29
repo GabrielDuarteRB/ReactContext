@@ -9,6 +9,7 @@ const PeopleProvider = ({children}) => {
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
+    const [pessoa, setPessoa] = useState([])
 
     useEffect(() => {
         // handleGet()
@@ -37,6 +38,16 @@ const PeopleProvider = ({children}) => {
             alert(error);
         }
     }
+
+    const getPersonById = async (id) => {
+        try {
+            const {data} = await apiDBC.get(`/pessoa/lista-completa?idPessoa=${id}`)
+            data.map(d => setPessoa(d))
+          } catch (error) {
+            toastError('Ocorreu um erro!')
+            console.log(error);
+          }
+    }
  
     const handleUpdate =  async (values, id) => {
         console.log(id)
@@ -54,14 +65,14 @@ const PeopleProvider = ({children}) => {
             toastSucess('Usuário atualizado com sucesso')
         } catch (error) {
             if(data.length !== 10) {
-                toastError('Data incorreto')
+                toastError('Data incorreto!')
                 return
             }
             if(cpf.length !== 11) {
                 toastError('Cpf incorreto!')
                 return
             }
-            toastError('Ocorreu um erro')            
+            toastError('Ocorreu um erro!')            
         }
     }
     
@@ -80,14 +91,14 @@ const PeopleProvider = ({children}) => {
             toastSucess('Usuário criado com sucesso')
         } catch (error) {
             if(data.length !== 10) {
-                toastError('Data incorreto')
+                toastError('Data incorreto!')
                 return
             }
             if(cpf.length !== 11) {
                 toastError('Cpf incorreto!')
                 return
             }
-            toastError('Ocorreu um erro')
+            toastError('Ocorreu um erro!')
         }
     }
     
@@ -97,7 +108,7 @@ const PeopleProvider = ({children}) => {
             await apiDBC.delete(`/pessoa/${id}`)
             toastSucess('Usuário deletado com sucesso')
         } catch (error) {
-            toastError('Ocorreu um erro')
+            toastError('Ocorreu um erro!')
         }
     }
 
@@ -108,7 +119,7 @@ const PeopleProvider = ({children}) => {
       }
 
     return(
-        <PeopleContext.Provider value={{handleUpdate, handleCreate, handleDelete, handleGet}}>
+        <PeopleContext.Provider value={{handleUpdate, handleCreate, handleDelete, handleGet, getPersonById, setPessoa, pessoa}}>
         {children}
         </PeopleContext.Provider>
     )

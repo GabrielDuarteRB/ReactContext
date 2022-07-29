@@ -3,12 +3,16 @@ import List from "../../components/List/List";
 import Aside from '../../components/Aside/Aside'
 import Tela from './People.styled.js'
 import { ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { PeopleContext } from "../../context/PeopleContext";
 
 const People = () => {
 
+  const {setPessoa} = useContext(PeopleContext)
   const navigate = useNavigate()
 
-  const handleCreate = (pessoa) => {
+  const handleCreate = () => {
+    setPessoa('')
     navigate(`/criarPessoas`)
   }
 

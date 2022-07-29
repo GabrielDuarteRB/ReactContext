@@ -3,25 +3,18 @@ import * as Yup from 'yup';
 import MaskedInput from "react-text-mask";
 import { useParams } from 'react-router-dom';
 import { maskCPF, maskData } from '../../utils/masked';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { PeopleContext } from '../../context/PeopleContext';
-import { apiDBC } from '../../api';
 import { ToastContainer } from 'react-toastify';
 import { toastError } from '../../components/Toast/Toast';
 
 const PeopleForm = () => {
 
-  const [pessoa, setPessoa] = useState([])
-  const {handleCreate, handleUpdate} = useContext(PeopleContext)
+  const {handleCreate, handleUpdate, getPersonById, pessoa} = useContext(PeopleContext)
   const {id} = useParams()
 
   const api = async () => {
-    try {
-      const {data} = await apiDBC.get(`/pessoa/lista-completa?idPessoa=${id}`)
-      data.map(d => setPessoa(d))
-    } catch (error) {
-      alert(error);
-    }
+    getPersonById(id)
   }
 
   const RegisterSchema = Yup.object().shape({
@@ -50,15 +43,14 @@ const PeopleForm = () => {
     }
   }, [])
 
-  
   return (
     <>
         <Formik
             initialValues={{ 
-                nome: '',
-                cpf: `${pessoa.cpf}`,
-                dataNascimento:`${pessoa.dataNascimento}`,
-                email: `${pessoa.email}`,
+                nome: `${pessoa ? pessoa.nome : ''}`,
+                cpf: '',
+                dataNascimento:'',
+                email: '',
             }}
             onSubmit={(values) => id ? handleUpdate(values, id) : handleCreate(values)}
             validationSchema={RegisterSchema}
@@ -75,38 +67,39 @@ const PeopleForm = () => {
              />
 
             <Field name='dataNascimento'>
-            {field => (
-              <MaskedInput
-              {...field}
-              id='dataNascimento'
-              placeholder='Data de Nascimento'
-              value={values.dataNascimento} 
-              onChange={handleChange}
-              mask={maskData}
-              type='text'
-              />
-            )} 
+              {field => (
+                <MaskedInput
+                {...field}
+                id='dataNascimento'
+                placeholder='Data de Nascimento'
+                value={values.dataNascimento} 
+                onChange={handleChange}
+                mask={maskData}
+                type='text'
+                />
+              )} 
             </Field>
 
             <Field name='cpf'>
               {field => (
-                  <MaskedInput
-                  {...field}
-                  id='cpf'
-                  placeholder='cpf'
-                  value={values.cpf} 
-                  onChange={handleChange}
-                  mask={maskCPF}
-                  type='text'
-                  />
+                <MaskedInput
+                {...field}
+                id='cpf'
+                placeholder='cpf'
+                value={values.cpf} 
+                onChange={handleChange}
+                mask={maskCPF}
+                type='text'
+                />
               )} 
             </Field>
             <Field 
-            name='email' 
-            type='email' 
-            placeholder='email' 
-            value={values.email} 
-            onChange={handleChange}/>
+              name='email' 
+              type='email' 
+              placeholder='email' 
+              value={values.email} 
+              onChange={handleChange}
+            />
             <button onClick={() => buttonSubmit(errors)} type="submit">{id ? 'Atualizar' : 'Criar'}</button>
           </Form>
         )}

@@ -1,3 +1,4 @@
+import moment from "moment";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiDBC } from "../api";
@@ -15,20 +16,6 @@ const PeopleProvider = ({children}) => {
         // handleGet()
         setLoading(false)
     }, [])
-
-    const conversorCPF = (cpf) => {
-        cpf = cpf.replaceAll('.', '')
-        cpf = cpf.replaceAll('_', '')
-        cpf = cpf.replace('-', '')
-        return cpf
-    }
-    
-    const conversorData = (data) => {
-        data = data.replaceAll('_', '')
-        data = data.split('/')
-        data = `${data[2]}-${data[1]}-${data[0]}`
-        return data
-    }
 
     const handleGet = async () => {
         try {
@@ -49,56 +36,25 @@ const PeopleProvider = ({children}) => {
           }
     }
  
-    const handleUpdate =  async (values, id) => {
-        console.log(id)
-        const cpf = conversorCPF(values.cpf)
-        const data = conversorData(values.dataNascimento)    
-    
+    const handleUpdate =  async (values, id) => { 
         try {
-            await apiDBC.put(`/pessoa/${id}`, {
-            'nome': values.nome,
-            'dataNascimento': data,
-            'cpf': cpf,
-            'email': values.email,
-            })
+            await apiDBC.put(`/pessoa/${id}`, values)
             navigate('/pessoas')
             toastSucess('Usuário atualizado com sucesso')
         } catch (error) {
-            if(data.length !== 10) {
-                toastError('Data incorreto!')
-                return
-            }
-            if(cpf.length !== 11) {
-                toastError('Cpf incorreto!')
-                return
-            }
             toastError('Ocorreu um erro!')            
         }
     }
     
     const handleCreate = async (values) => {
-        const cpf = conversorCPF(values.cpf)
-        const data = conversorData(values.dataNascimento)    
-    
         try {
-            await apiDBC.post('/pessoa', {
-                'nome': values.nome,
-                'dataNascimento': data,
-                'cpf': cpf,
-                'email': values.email
-            })
+            await apiDBC.post('/pessoa', values)
             navigate('/pessoas')
             toastSucess('Usuário criado com sucesso')
+            return
         } catch (error) {
-            if(data.length !== 10) {
-                toastError('Data incorreto!')
-                return
-            }
-            if(cpf.length !== 11) {
-                toastError('Cpf incorreto!')
-                return
-            }
             toastError('Ocorreu um erro!')
+            return
         }
     }
     

@@ -3,7 +3,7 @@ import List from "../../components/List/List";
 import Aside from '../../components/Aside/Aside'
 import Tela from './People.styled.js'
 import { ToastContainer } from "react-toastify";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PeopleContext } from "../../context/PeopleContext";
 
 const People = () => {
@@ -12,9 +12,12 @@ const People = () => {
   const navigate = useNavigate()
 
   const handleCreate = () => {
-    setPessoa('')
     navigate(`/criarPessoas`)
   }
+
+  useEffect(() =>{
+    setPessoa([])
+  }, [])
 
   return (
     <Tela>

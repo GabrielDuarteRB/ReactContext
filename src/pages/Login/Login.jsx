@@ -4,11 +4,21 @@ import { AuthContext } from '../../context/authProvider';
 import { Card, LoginDiv, TextoPequeno, SubTitulo, Titulo, Label, Input, Campo, Button, Password, Azul } from './Login.styled';
 import Imagem from '../../components/Imagem/Imagem';
 import { Link } from 'react-router-dom';
+import { FaEye } from "react-icons/fa";
 import { ToastContainer } from 'react-toastify';
 
 const Login = () => {
 
   const {handleLogin} = useContext(AuthContext)
+
+  const viewPassword = () => {
+    const type = document.getElementById("senha").type
+    if (type === 'password') {
+      document.getElementById("senha").type = 'text'
+      return
+    }
+    document.getElementById("senha").type = 'password'
+  }
   
   return (
     <LoginDiv>
@@ -25,7 +35,7 @@ const Login = () => {
           onSubmit={values => handleLogin(values)}
         >
           
-          {() => (
+          {({values, setFieldValue}) => (
               <Form>
                 <Campo>
                   <div>
@@ -36,10 +46,11 @@ const Login = () => {
 
                 <Campo>
                   <Password>
-                    <Label htmlFor='senha'>PASSWORD</Label>
+                    <Label htmlFor='senha'>PASSWORD </Label>
                     <TextoPequeno small>Forgot Password</TextoPequeno>
                   </Password>
-                  <Field name="senha" type="password" placeholder='password'/>
+                  <Field id='senha' name="senha" type="password" placeholder='password' />
+                  <TextoPequeno small><FaEye onClick={viewPassword}/></TextoPequeno>
                 </Campo>
                 <ToastContainer />
                 <Button type='submit'>Log In</Button>

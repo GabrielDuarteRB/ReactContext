@@ -67,6 +67,9 @@ export const Campo = styled.div `
             opacity: 0.4;
         }
     }
+    & svg {
+        margin-left: -30px ;
+    }
 `
 
 export const Password = styled.div `

@@ -20,7 +20,13 @@ const List = () => {
   const navigate = useNavigate()
 
   const handleUpdate = (pessoa) => {  
+    console.log(pessoa.idPessoa) 
     navigate(`/atualizarPessoas/${pessoa.idPessoa}`)
+  }
+
+  const handleAddAddress = (pessoa) => {  
+    console.log(pessoa.idPessoa)
+    navigate(`/endereco/${pessoa.idPessoa}`)
   }
   
   const handleGetPessoas = async () => {
@@ -48,7 +54,7 @@ const List = () => {
  
   useEffect(() => {
     handleGetPessoas()
-  }, [pessoas])
+  }, [])
 
   return (
     
@@ -60,22 +66,15 @@ const List = () => {
             <Legenda>Priority</Legenda>
         </Lista>
         {pessoas.map((pessoa) => (
-              <Lista key={pessoa.idPessoa}>
+          <Lista key={pessoa.idPessoa}>
                   <Texto >{pessoa.email}</Texto>
                   <Texto>{pessoa.nome}</Texto>
                   <Texto>{moment(pessoa.dataNascimento).locale('ptbr').format('ll')}</Texto>
                   <Buttons id={pessoa.idPessoa}>
-                    {
-                      visivel
-                      ?
-                      (<>
                       <Button backgroundColor='yellow' type="button" onClick={() => handleUpdate(pessoa)}>Atualizar</Button>
+                      <Button backgroundColor='orange' type="button" onClick={() => handleAddAddress(pessoa)}>Adicionar endereço</Button>
                       <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button>
-                      </>)
-                      :
-                      null
-                    }
-                    <FaEllipsisV onClick={visibilidade  } />
+                    {/* <FaEllipsisV onClick={visibilidade  } /> */}
                   </Buttons >
               </Lista>
           ))}

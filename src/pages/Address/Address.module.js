@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-const Tela = styled.section `
-    background-color: #E5E5E5;;
-    display:grid ;
-    gap: 30px;
-    grid-template-columns: 255px auto ;
-    height: 100% ; 
-    padding-right: 32px;
-    width: 100vw ;
-`
-
 export const Campos = styled.div `
     align-items: flex-start ;
     border: 1px solid #DFE0EB;
@@ -34,5 +24,3 @@ export const Formulario = styled.form `
     justify-content: center ;
 
 `
-
-export default Tela

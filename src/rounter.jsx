@@ -8,6 +8,7 @@ import Usuario from './pages/Usuario/Usuario';
 import NotFound from "./pages/NotFound/NotFound";
 import PeopleForm from "./pages/People/PeopleForm";
 import PeopleProvider from "./context/PeopleContext";
+import AddressProvider from "./context/AddressContext";
 
 const Router = () => {
 
@@ -17,26 +18,28 @@ const Router = () => {
   return (
   <BrowserRouter>
     {/* <Header /> */}
-    <PeopleProvider>
-      <Routes>
-        {
-          !auth ? (
+    <AddressProvider>
+      <PeopleProvider>
+        <Routes>
+          {
+            !auth ? (
+              <>
+                <Route path='/' element={<Login />}/>
+                <Route path='/usuario' element={<Usuario />}/>
+              </>
+            )
+            :
             <>
-              <Route path='/' element={<Login />}/>
-              <Route path='/usuario' element={<Usuario />}/>
+              <Route path='/endereco/:id' element={<Address />}/>
+              <Route path='/pessoas' element={<People />}/>
+              <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>
+              <Route path='/criarPessoas' element={<PeopleForm />}/>
             </>
-          )
-          :
-          <>
-            <Route path='/endereco' element={<Address />}/>
-            <Route path='/pessoas' element={<People />}/>
-            <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>
-            <Route path='/criarPessoas' element={<PeopleForm />}/>
-          </>
-        }
-        <Route path='*' element={<NotFound/>} />
-      </Routes>
-    </PeopleProvider>
+          }
+          <Route path='*' element={<NotFound/>} />
+        </Routes>
+      </PeopleProvider>
+    </AddressProvider>
     
   </BrowserRouter>
   )

@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 import {cpf} from 'cpf-cnpj-validator'
 import moment from 'moment';
+import { apiCEP } from '../../api';
+import { toastError } from '../../components/Toast/Toast';
 
 export const ValidationCreate = Yup.object().shape({
     nome: Yup.string()
@@ -39,4 +41,24 @@ export const ValidationAddress = Yup.object().shape({
     bairro: Yup.string().min(2, 'Too Short!').required('Required'),
     localidade: Yup.string().min(2, 'Too Short!').required('Required'),
     uf: Yup.string().min(2, 'Too Short!').required('Required'),
-  })
+})
+
+export const validationCEP = async (event, formik) => {
+  const cep = event.target.value?.replace(/[^0-9]/g, '')
+  
+  if (cep.length !== 8) {
+    toastError("Cep muito pequeno!")
+    return
+  }
+
+  try {
+    const {data} = await apiCEP.get(`/${cep}/json/`)
+    formik.setFieldValue('logradouro',data.logradouro)
+    formik.setFieldValue('numero', data.numero)
+    formik.setFieldValue('complemento', data.complemento)
+    formik.setFieldValue('estado',data.localidade)
+    formik.setFieldValue('cidade', data.uf)      
+  } catch (error) {
+    console.log(error)
+  }
+}

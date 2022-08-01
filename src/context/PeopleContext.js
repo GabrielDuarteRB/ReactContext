@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiDBC } from "../api";
 import { toastError, toastSucess } from "../components/Toast/Toast";
+import Loading from "../pages/Loading/Loading"
 
 export const PeopleContext = createContext()
 
@@ -70,7 +71,7 @@ const PeopleProvider = ({children}) => {
 
     if(loading) {
         return(
-          <h1>Loading</h1>
+          <Loading/>
         )
       }
 

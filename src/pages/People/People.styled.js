@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Tela = styled.section `
+export const Tela = styled.section `
     background-color: #E5E5E5;;
     display:grid ;
     gap: 30px;
@@ -8,31 +8,26 @@ const Tela = styled.section `
     height: 100% ; 
     padding-right: 32px;
     width: 100vw ;
-`
-
-export const Campos = styled.div `
-    align-items: flex-start ;
-    border: 1px solid #DFE0EB;
-    border-radius: 8px; 
-    background-color: white ;
-    display: flex ;
-    flex-direction: column ;
-    padding:40px;
-    & button {
-        margin-top: 16px;
+    & > aside{
+        height: 100vh ;
+        position: fixed;
     }
-    & button:first-child{
-        margin-right: 8px
+    & > div:first-of-type {
+        position: absolute;
+        padding: 0 30px ;
+        left: 255px;
     }
 `
 
-export const Formulario = styled.form `
+export const ButtonDiv = styled.div `
     align-items: center;
-    background-color: #363740;
-    display: flex ;
-    height: 100vh;
-    justify-content: center ;
-
+    background-color: #FFFFFF;
+    border: 1px solid #DFE0EB;
+    border-radius: 8px;
+    display: flex;
+    gap:32px;
+    margin-top: 80px;
+    padding: 16px;
+    width: 100%;
 `
 
-export default Tela

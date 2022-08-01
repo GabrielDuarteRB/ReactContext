@@ -1,0 +1,20 @@
+.loadingSpan{
+    text-align: center;
+}
+
+.loading{
+    animation: is-rotating 1s infinite;
+    border: 10px solid #e5e5e5;
+    border-top-color: #51d4db;
+    border-radius: 50%;
+    height: 300px;
+    margin: auto;
+    margin-top: 156px;
+    width: 300px;
+}
+
+@keyframes is-rotating {
+    to{
+        transform: rotate(1turn)
+    }
+}

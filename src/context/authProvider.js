@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { createContext } from "react"
 import { apiDBC } from '../api' 
 import { toastError } from "../components/Toast/Toast"
+import Loading from "../pages/Loading/Loading"
 
 export const AuthContext = createContext()
 
@@ -52,7 +53,7 @@ const AuthProvider = ({children}) => {
 
   if(loading) {
     return(
-      <h1>Loading</h1>
+      <Loading/>
     )
   }
 

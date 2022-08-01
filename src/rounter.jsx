@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import PeopleForm from "./pages/People/PeopleForm";
 import PeopleProvider from "./context/PeopleContext";
 import AddressProvider from "./context/AddressContext";
+import PeopleAddress from "./pages/People/PeopleAddress";
 
 const Router = () => {
 
@@ -31,6 +32,7 @@ const Router = () => {
             :
             <>
               <Route path='/endereco/:id' element={<Address />}/>
+              <Route path='/endereco' element={<PeopleAddress />}/>
               <Route path='/pessoas' element={<People />}/>
               <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>
               <Route path='/criarPessoas' element={<PeopleForm />}/>

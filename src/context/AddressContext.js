@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiDBC } from "../api";
 import { toastError, toastSucess } from "../components/Toast/Toast";
+import Loading from "../pages/Loading/Loading"
 
 export const AddressContext = createContext()
 
@@ -15,27 +16,20 @@ const AddressProvider = ({children}) => {
     }, [])
 
     const GetAddress = async (values, id) => {
-
         try {
-            await apiDBC.post(`/endereco/${id}`)
-            navigate('/pessoas')
-            return
+            await apiDBC.get(`/pessoa/lista-com-enderecos`)
         } catch (error) {
             toastError('Ocorreu um erro!')
-            return
         }
     }
 
     const handleCreateAddress = async (values, id) => {
-
         try {
-            await apiDBC.post('/endereco/{idPessoa}?idPessoa=' + id, values)
+            await apiDBC.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
             navigate('/pessoas')
             toastSucess('Endereco criado com sucesso')
-            return
         } catch (error) {
             toastError('Ocorreu um erro!')
-            return
         }
     }
 
@@ -65,12 +59,12 @@ const AddressProvider = ({children}) => {
 
     if(loading) {
         return(
-          <h1>Loading</h1>
+          <Loading/>
         )
       }
 
     return(
-        <AddressContext.Provider value={{ handleCreateAddress, handleDeleteAddress, handleUpdateAddress }}>
+        <AddressContext.Provider value={{ handleCreateAddress, handleDeleteAddress, handleUpdateAddress, GetAddress }}>
         {children}
         </AddressContext.Provider>
     )

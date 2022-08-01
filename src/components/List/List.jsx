@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { PeopleContext } from "../../context/PeopleContext"
 import { Lista, Texto, Legenda, Buttons, Pessoas } from "./List.styled"
-import {FaEllipsisV} from 'react-icons/fa'
 import moment from 'moment'
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button"
@@ -13,7 +12,6 @@ Modal.setAppElement('#root');
 const List = () => {
   
   const {handleGet, handleDelete} = useContext(PeopleContext)
-  const [visivel, setVisivel] = useState(false)
   const [pessoas, setPessoas] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [idPessoa, setIdPessoa] = useState('')
@@ -47,14 +45,10 @@ const List = () => {
   const closeModal = () => {
     setModalIsOpen(false)
   }
-
-  const visibilidade = () => {
-    visivel ? setVisivel(false) : setVisivel(true)
-  }
  
   useEffect(() => {
     handleGetPessoas()
-  }, [])
+  }, [pessoas])
 
   return (
     
@@ -63,7 +57,6 @@ const List = () => {
             <Legenda>Ticket details</Legenda>
             <Legenda>Customer name</Legenda>
             <Legenda>Date</Legenda>
-            <Legenda>Priority</Legenda>
         </Lista>
         {pessoas.map((pessoa) => (
           <Lista key={pessoa.idPessoa}>
@@ -74,7 +67,6 @@ const List = () => {
                       <Button backgroundColor='yellow' type="button" onClick={() => handleUpdate(pessoa)}>Atualizar</Button>
                       <Button backgroundColor='orange' type="button" onClick={() => handleAddAddress(pessoa)}>Adicionar endereço</Button>
                       <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button>
-                    {/* <FaEllipsisV onClick={visibilidade  } /> */}
                   </Buttons >
               </Lista>
           ))}

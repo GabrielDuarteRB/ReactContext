@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import List from "../../components/List/List";
 import Aside from '../../components/Aside/Aside'
-import Tela from './People.styled.js'
+import {Tela, ButtonDiv} from './People.styled.js'
 import { ToastContainer } from "react-toastify";
 import { useContext, useEffect } from "react";
 import { PeopleContext } from "../../context/PeopleContext";
+import { Button } from "../../components/Button/Button";
 
 const People = () => {
 
@@ -23,9 +24,10 @@ const People = () => {
     <Tela>
       <Aside />
       <div>
-        <div>
-          <button type="button" onClick={() => handleCreate()}>Adicionar</button>
-        </div>
+        <ButtonDiv>
+          <h1>Adicionar nova pessoa</h1>
+          <Button backgroundColor='green' type="button" onClick={() => handleCreate()}>Adicionar</Button>
+        </ButtonDiv>
         <List /> 
       </div>
       <ToastContainer />

@@ -1,46 +1,62 @@
-import { useContext } from 'react';
+import { Field, Form, Formik } from 'formik';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/authProvider';
-import { Field, Form, Formik, useFormik} from 'formik';
-import {ToastContainer} from 'react-toastify';
-import { toastError} from '../../components/Toast/Toast';
-import { ValidationSignup } from '../../utils/ValidationsForm/ValidationsForm';
+import { Card, LoginDiv, TextoPequeno, SubTitulo, Titulo, Label, Campo, Button, Password, Azul } from '../Login/Login.styled';
+import Imagem from '../../components/Imagem/Imagem';
+import { FaEye } from "react-icons/fa";
+import { ToastContainer } from 'react-toastify';
 
 const Usuario = () => {
 
-  const {handleSingUp} = useContext(AuthContext)
-  const buttonSubmit = (error) => {
-    toastError(error.login)
-    toastError(error.senha)
+  const {handleSignUp} = useContext(AuthContext)
+  const [type, setType] = useState('password')
+
+  const viewPassword = () => {
+    if (type === 'password') {
+      setType('text')
+      return
+    }
+    setType('password')
   }
-
+  
   return (
-    <div>
-      <h1>Faça seu cadastro</h1>
+    <LoginDiv>
+      <Card>
+        <Imagem fontsize={'30px'}/>
+        <SubTitulo>DashBoard Kit</SubTitulo>
+        <Titulo>sign up to Dashboard Kit</Titulo>
+        <TextoPequeno>Enter your email adn password below</TextoPequeno>
+        <Formik 
+          initialValues={{
+            login: '',
+            senha: '',
+          }}
+          onSubmit={values => handleSignUp(values)}
+        >
+          
+          {({values}) => (
+              <Form>
+                <Campo>
+                  <div>
+                    <Label htmlFor='login'>EMAIL</Label>
+                  </div>
+                  <Field name="login" placeholder='Email address'/>
+                </Campo>
 
-      <Formik 
-        initialValues={{
-          login: '',
-          senha: '',
-        }}
-        validationSchema={ValidationSignup}
-        onSubmit={values =>  handleSingUp(values)}
-      >
-        
-        {({errors, setFieldValue, handleChange}) => (
-            <Form>
-              <div> 
-                <label htmlFor='login'>Login</label>
-                <Field name="login"/>
-                
-                <label htmlFor='senha'>Senha</label>
-                <Field name="senha" type="password"/>
-              </div>
-              <ToastContainer />
-              <button type='submit' onClick={() => buttonSubmit(errors)}>Submit</button>              
-            </Form>
-        )}
-      </Formik>
-    </div>
+                <Campo>
+                  <Password>
+                    <Label htmlFor='senha'>PASSWORD</Label>
+                  </Password>
+                  <Field name="senha" type={type} placeholder='password' />
+                  <TextoPequeno small><FaEye onClick={viewPassword}/></TextoPequeno>
+                </Campo>
+                <ToastContainer />
+                <Button type='submit'>Sign up</Button>
+              </Form>
+          )}
+        </Formik>
+      </Card>
+    </LoginDiv>
   )
 }
 export default Usuario    

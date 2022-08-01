@@ -41,9 +41,9 @@ const AuthProvider = ({children}) => {
     }
   }
 
-  const handleSingUp = async (values) => {
+  const handleSignUp = async (values) => {
     try {
-      // await apiDBC.post('/auth/create', values)
+      await apiDBC.post('/auth/create', values)
       console.log('funcionou!')
       window.location.href = '/'
     } catch (error) {
@@ -58,7 +58,7 @@ const AuthProvider = ({children}) => {
   }
 
   return (
-    <AuthContext.Provider value={{handleLogin, handleLogout, handleSingUp, auth}}>
+    <AuthContext.Provider value={{handleLogin, handleLogout, handleSignUp, auth}}>
         {children}
     </AuthContext.Provider>
   )

@@ -26,7 +26,7 @@ const Login = () => {
         <Imagem fontsize={'30px'}/>
         <SubTitulo>DashBoard Kit</SubTitulo>
         <Titulo>Log In to Dashboard Kit</Titulo>
-        <TextoPequeno>Enter yout email adn password below</TextoPequeno>
+        <TextoPequeno>Enter your email adn password below</TextoPequeno>
         <Formik 
           initialValues={{
             login: '',

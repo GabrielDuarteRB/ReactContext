@@ -60,6 +60,7 @@ const PeopleProvider = ({children}) => {
     }
     
     const handleDelete = async (id, setModalIsOpen) => {
+        navigate('/pessoas')
         setModalIsOpen(false)
         try {
             await apiDBC.delete(`/pessoa/${id}`)

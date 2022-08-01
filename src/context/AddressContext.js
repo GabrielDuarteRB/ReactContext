@@ -15,9 +15,19 @@ const AddressProvider = ({children}) => {
         setLoading(false)
     }, [])
 
-    const GetAddress = async (values, id) => {
+    const GetAddressId = async (id) => {
         try {
-            await apiDBC.get(`/pessoa/lista-com-enderecos`)
+            const {data} = await apiDBC.get(`/endereco/${id}`)
+            return data
+        } catch (error) {
+            toastError('Ocorreu um erro!')
+        }
+    }
+
+    const GetAddress = async (id) => {
+        try {
+            const {data} = await apiDBC.get(`/pessoa/lista-com-enderecos`)
+            return data
         } catch (error) {
             toastError('Ocorreu um erro!')
         }
@@ -33,22 +43,21 @@ const AddressProvider = ({children}) => {
         }
     }
 
-    const handleDeleteAddress = async (values, id) => {
+    const handleDeleteAddress = async (id, setModalIsOpen) => {
         try {
-            await apiDBC.delete(`/endereco/idPessoa=${id}`)
-            navigate('/pessoas')
+            await apiDBC.delete(`/endereco/${id}`)
             toastSucess('Endereco deletado com sucesso')
-            return
+            navigate('/endereco')
+            setModalIsOpen(false)
         } catch (error) {
             toastError('Ocorreu um erro!')
-            return
         }
     }
 
     const handleUpdateAddress = async (values, id) => {
         try {
-            await apiDBC.delete(`/endereco/${id}`, values)
-            navigate('/pessoas')
+            await apiDBC.put(`/endereco/${id}`, values)
+            navigate('/endereco')
             toastSucess('Endereco atualizado com sucesso')
             return
         } catch (error) {
@@ -64,7 +73,7 @@ const AddressProvider = ({children}) => {
       }
 
     return(
-        <AddressContext.Provider value={{ handleCreateAddress, handleDeleteAddress, handleUpdateAddress, GetAddress }}>
+        <AddressContext.Provider value={{ handleCreateAddress, handleDeleteAddress, handleUpdateAddress, GetAddress, GetAddressId }}>
         {children}
         </AddressContext.Provider>
     )

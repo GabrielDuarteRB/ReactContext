@@ -7,3 +7,7 @@ export const maskCEP = [/\d/,/\d/,/\d/,/\d/,/\d/,"-",/\d/,/\d/,/\d/,];
 export const maskCPFAdd = (cpf) => {
     return cpf.match(/.{1,3}/g).join(".").replace(/\.(?=[^.]*$)/,"-")
 }   
+
+export const maskCEPAdd = (cep) => {
+    return cep.replace(/(\d{5})(\d{3})/g, "\$1-\$2")
+}

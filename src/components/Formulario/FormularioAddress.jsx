@@ -4,7 +4,7 @@ import { Button } from "../Button/Button"
 import { Input, InputMask } from "../Input/Input"
 import { Campos, Formulario } from "./Formulario.module"
 
-const FormularioAddress = ({formik, setFuncao}) => {
+const FormularioAddress = ({formik, funcao}) => {
   return (
     <Formulario onSubmit={formik.handleSubmit}>
         <Campos> 
@@ -88,7 +88,7 @@ const FormularioAddress = ({formik, setFuncao}) => {
         placeholder="país"
         />
 
-        <Button width='100%' backgroundColor='green' type='submit'>adicionar</Button>
+        <Button width='100%' backgroundColor='green' type='submit'>{funcao === 'add' ? 'adicionar' : 'atualizar'}</Button>
         </Campos>
 
       </Formulario>

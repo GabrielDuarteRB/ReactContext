@@ -8,8 +8,7 @@ import FormularioAddress from "../../components/Formulario/FormularioAddress";
 const Address = () => {
 
   const {id} = useParams()
-  const [funcao, setFuncao] = useState('')
-  const {handleCreateAddress, handleDeleteAddress} = useContext(AddressContext)
+  const {handleCreateAddress} = useContext(AddressContext)
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +39,7 @@ const Address = () => {
 
   return (
     <>
-      <FormularioAddress formik={formik} setFuncao={setFuncao}/>
+      <FormularioAddress formik={formik} funcao='add'/>
     </>
   )
 }

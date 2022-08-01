@@ -10,6 +10,7 @@ import PeopleForm from "./pages/People/PeopleForm";
 import PeopleProvider from "./context/PeopleContext";
 import AddressProvider from "./context/AddressContext";
 import PeopleAddress from "./pages/People/PeopleAddress";
+import AddressUpdate from "./pages/Address/AddressUpdate";
 
 const Router = () => {
 
@@ -32,6 +33,7 @@ const Router = () => {
             :
             <>
               <Route path='/endereco/:id' element={<Address />}/>
+              <Route path='/atualizarendereco/:idPessoa/:idEndereco' element={<AddressUpdate />}/>
               <Route path='/endereco' element={<PeopleAddress />}/>
               <Route path='/pessoas' element={<People />}/>
               <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>

@@ -78,8 +78,8 @@ const List = () => {
             >
               <div>Tem certeza que deseja excluir?</div>
               <div style={customStyles.butoes}>
-                <button onClick={() => deletar(idPessoa, setModalIsOpen)}>Sim</button>
-                <button onClick={closeModal}>Não</button>
+                <button style={customStyles.sim} onClick={() => deletar(idPessoa, setModalIsOpen)}>Sim</button>
+                <button style={customStyles.nao} onClick={closeModal}>Não</button>
               </div>
           </Modal>
       </Pessoas>

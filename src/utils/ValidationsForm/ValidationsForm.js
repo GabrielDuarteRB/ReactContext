@@ -37,7 +37,7 @@ export const ValidationAddress = Yup.object().shape({
       .max(8, 'Too Long!')
       .required('Required'),
     logradouro: Yup.string().min(2, 'Too Short!').required('Required'),
-    complemento: Yup.string().min(2, 'Too Short!').required('Required'),
+    complemento: Yup.string().min(2, 'Too Short!'),
     bairro: Yup.string().min(2, 'Too Short!').required('Required'),
     localidade: Yup.string().min(2, 'Too Short!').required('Required'),
     uf: Yup.string().min(2, 'Too Short!').required('Required'),

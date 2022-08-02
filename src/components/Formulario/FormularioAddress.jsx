@@ -2,13 +2,13 @@ import { maskCEP } from "../../utils/masked"
 import { validationCEP } from "../../utils/ValidationsForm/ValidationsForm"
 import { Button } from "../Button/Button"
 import { Input, InputMask } from "../Input/Input"
-import { Campos, Formulario } from "./Formulario.module"
+import { Campos, Formulario, Select } from "./Formulario.module"
 
 const FormularioAddress = ({formik, funcao}) => {
   return (
     <Formulario onSubmit={formik.handleSubmit}>
         <Campos> 
-          <label htmlFor='cep'>CEP</label>
+          <label htmlFor='cep'>CEP*</label>
           <InputMask
             name="cep"
             id='cep'
@@ -19,17 +19,20 @@ const FormularioAddress = ({formik, funcao}) => {
             type='text'
             placeholder="CEP"
           />
-          <label htmlFor='tipo'>tipo</label>
-          <Input
+          <label htmlFor='tipo'>tipo*</label>
+          <Select
           name="tipo"
           id="tipo"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.tipo}
-          placeholder="Tipo"
-          />
+          >
+            <option value=""></option>
+            <option value="RESIDENCIAL">RESIDENCIAL</option>
+            <option value="COMERCIAL">COMERCIAL</option>
+          </Select>
 
-          <label htmlFor='logradouro'>logradouro</label>
+          <label htmlFor='logradouro'>logradouro*</label>
           <Input
            name="logradouro"
            id="logradouro"
@@ -39,7 +42,7 @@ const FormularioAddress = ({formik, funcao}) => {
            placeholder="Logradouro"
           />
 
-          <label htmlFor='numero'>Número</label>
+          <label htmlFor='numero'>Número*</label>
           <Input
           id="numero"
           name="numero"
@@ -49,7 +52,7 @@ const FormularioAddress = ({formik, funcao}) => {
           placeholder="Número"
           />
 
-          <label htmlFor='complemento'>complemento</label>
+          <label htmlFor='complemento'>complemento*</label>
           <Input
           id="complemento"
           name="complemento"
@@ -59,7 +62,7 @@ const FormularioAddress = ({formik, funcao}) => {
           placeholder="Complemento"
           />
           
-          <label htmlFor='cidade'>cidade</label>
+          <label htmlFor='cidade'>cidade*</label>
           <Input
           id="cidade"
           name="cidade"
@@ -68,7 +71,7 @@ const FormularioAddress = ({formik, funcao}) => {
           value={formik.values.cidade}
           placeholder="cidade"
           />
-          <label htmlFor='estado'>estado</label>
+          <label htmlFor='estado'>estado*</label>
           <Input
           id="estado"
           name="estado"
@@ -78,7 +81,7 @@ const FormularioAddress = ({formik, funcao}) => {
           placeholder="estado"
           />
 
-        <label htmlFor='pais'>país</label>
+        <label htmlFor='pais'>país*</label>
         <Input
         id="pais"
         name="pais"

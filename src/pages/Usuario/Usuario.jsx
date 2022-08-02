@@ -38,14 +38,14 @@ const Usuario = () => {
               <Form>
                 <Campo>
                   <div>
-                    <Label htmlFor='login'>EMAIL</Label>
+                    <Label htmlFor='login'>EMAIL*</Label>
                   </div>
                   <Field name="login" placeholder='Email address'/>
                 </Campo>
 
                 <Campo>
                   <Password>
-                    <Label htmlFor='senha'>PASSWORD</Label>
+                    <Label htmlFor='senha'>PASSWORD*</Label>
                   </Password>
                   <Field name="senha" type={type} placeholder='password' />
                   <TextoPequeno small><FaEye onClick={viewPassword}/></TextoPequeno>

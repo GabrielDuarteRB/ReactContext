@@ -17,6 +17,7 @@ const FormularioPeople = ({formik, id}) => {
   return (
     <Formulario onSubmit={formik.handleSubmit}>
         <Campos>
+          <label name='nome'>Nome*</label>
           <Input
           id="nome"
           name="nome"
@@ -25,6 +26,7 @@ const FormularioPeople = ({formik, id}) => {
           onChange={formik.handleChange}
           value={formik.values.nome}
           />
+          <label name='dataNascimento'>Data de nascimento*</label>
           <InputMask
           name='dataNascimento'
           id='dataNascimento'
@@ -34,6 +36,7 @@ const FormularioPeople = ({formik, id}) => {
           mask={maskData}
           type='text'
           />
+          <label name='cpf'>CPF*</label>
           <InputMask
           name='cpf'
           id='cpf'
@@ -43,6 +46,7 @@ const FormularioPeople = ({formik, id}) => {
           mask={maskCPF}
           type='text'
           />
+          <label name='email'>email*</label>
           <Input 
             name='email' 
             type='email' 

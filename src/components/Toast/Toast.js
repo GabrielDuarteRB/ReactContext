@@ -8,7 +8,7 @@ export const toastSucess = (mensagem) => {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true,
+        draggable: true, 
         progress: undefined,
     });
 } 

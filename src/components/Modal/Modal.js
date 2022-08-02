@@ -12,5 +12,19 @@ export const customStyles = {
     alignItens: 'center',
     justifyContent: 'space-around',
     paddingTop: '16px'
+  },
+  sim: {
+    backgroundColor: 'green',
+    borderRadius: '5px',
+    border: 'none',
+    height: '24px',
+    width: '100px',
+  },
+  nao: {
+    backgroundColor: 'red',
+    borderRadius: '5px',
+    border: 'none',
+    height: '24px',
+    width: '100px',
   }
 };

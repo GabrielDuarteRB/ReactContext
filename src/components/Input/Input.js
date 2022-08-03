@@ -7,7 +7,7 @@ export const Input = styled.input `
     border-radius: 8px;
     height:42px ;
     padding-left: 16px;
-    margin-top: 8px;
+    margin-bottom: 8px;
     width: 316px ;
     &::placeholder {
         color: #4B506D;
@@ -21,7 +21,7 @@ export const InputMask = styled(MaskedInput) `
     border-radius: 8px;
     height:42px ;
     padding-left: 16px;
-    margin-top: 8px;
+    margin-bottom: 8px;
     width: 316px ;
     &::placeholder {
         color: #4B506D;

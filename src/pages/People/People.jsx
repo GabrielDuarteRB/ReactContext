@@ -30,7 +30,6 @@ const People = () => {
         </ButtonDiv>
         <List /> 
       </div>
-      <ToastContainer />
     </Tela>
   )
 }

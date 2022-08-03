@@ -31,7 +31,21 @@ export const Select = styled.select`
     border-radius: 8px;
     height:42px ;
     padding-left: 16px;
-    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 316px ;
+    &::placeholder {
+        color: #4B506D;
+        opacity: 0.4;
+    }
+`
+
+export const TextArea = styled.textarea`
+    background: #FCFDFE;
+    border: 1px solid #F0F1F7;
+    border-radius: 8px;
+    height:80px ;
+    padding: 8px 16px;
+    margin-bottom: 8px;
     width: 316px ;
     &::placeholder {
         color: #4B506D;

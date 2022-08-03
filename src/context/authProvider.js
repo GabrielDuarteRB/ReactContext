@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { createContext } from "react"
+import { ToastContainer } from "react-toastify"
 import { apiDBC } from '../api' 
 import { toastError } from "../components/Toast/Toast"
 import Loading from "../pages/Loading/Loading"
@@ -13,7 +14,6 @@ const AuthProvider = ({children}) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    console.log(token)
     if(token) {
       apiDBC.defaults.headers.common['Authorization'] = token;
       setAuth(true)
@@ -44,7 +44,6 @@ const AuthProvider = ({children}) => {
   const handleSignUp = async (values) => {
     try {
       await apiDBC.post('/auth/create', values)
-      console.log('funcionou!')
       window.location.href = '/'
     } catch (error) {
       console.log(error)
@@ -60,6 +59,7 @@ const AuthProvider = ({children}) => {
   return (
     <AuthContext.Provider value={{handleLogin, handleLogout, handleSignUp, auth}}>
         {children}
+        <ToastContainer/>
     </AuthContext.Provider>
   )
 }

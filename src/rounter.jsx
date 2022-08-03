@@ -11,37 +11,43 @@ import PeopleProvider from "./context/PeopleContext";
 import AddressProvider from "./context/AddressContext";
 import PeopleAddress from "./pages/People/PeopleAddress";
 import AddressUpdate from "./pages/Address/AddressUpdate";
+import ContactProvider from "./context/ContactContext";
+import Contact from "./pages/Contact/Contact";
+import PeopleContact from "./pages/People/PeopleContact";
 
 const Router = () => {
 
   const {auth} = useContext(AuthContext)
-  console.log(auth)
 
   return (
   <BrowserRouter>
     {/* <Header /> */}
     <AddressProvider>
       <PeopleProvider>
-        <Routes>
-          {
-            !auth ? (
+        <ContactProvider>
+          <Routes>
+            {
+              !auth ? (
+                <>
+                  <Route path='/' element={<Login />}/>
+                  <Route path='/usuario' element={<Usuario />}/>
+                </>
+              )
+              :
               <>
-                <Route path='/' element={<Login />}/>
-                <Route path='/usuario' element={<Usuario />}/>
+                <Route path='/endereco/:id' element={<Address />}/>
+                <Route path='/atualizarendereco/:idPessoa/:idEndereco' element={<AddressUpdate />}/>
+                <Route path='/endereco' element={<PeopleAddress />}/>
+                <Route path='/pessoas' element={<People />}/>
+                <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>
+                <Route path='/criarPessoas' element={<PeopleForm />}/>
+                <Route path='/criarcontato/:idPessoa/:idContato' element={<Contact />}/>
+                <Route path='/contatos/:id' element={<PeopleContact />}/>
               </>
-            )
-            :
-            <>
-              <Route path='/endereco/:id' element={<Address />}/>
-              <Route path='/atualizarendereco/:idPessoa/:idEndereco' element={<AddressUpdate />}/>
-              <Route path='/endereco' element={<PeopleAddress />}/>
-              <Route path='/pessoas' element={<People />}/>
-              <Route path='/atualizarPessoas/:id' element={<PeopleForm />}/>
-              <Route path='/criarPessoas' element={<PeopleForm />}/>
-            </>
-          }
-          <Route path='*' element={<NotFound/>} />
-        </Routes>
+            }
+            <Route path='*' element={<NotFound/>} />
+          </Routes>
+        </ContactProvider>
       </PeopleProvider>
     </AddressProvider>
     

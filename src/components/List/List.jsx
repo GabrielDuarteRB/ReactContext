@@ -3,9 +3,9 @@ import { PeopleContext } from "../../context/PeopleContext"
 import { Lista, Texto, Legenda, Buttons, Pessoas } from "./List.styled"
 import moment from 'moment'
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Button/Button"
 import { customStyles } from "../Modal/Modal"
 import Modal from 'react-modal';
+import { FaHouseUser, FaTrashAlt, FaSyncAlt, FaAddressBook } from "react-icons/fa";
 
 Modal.setAppElement('#root');
 
@@ -18,12 +18,10 @@ const List = () => {
   const navigate = useNavigate()
 
   const handleUpdate = (pessoa) => {  
-    console.log(pessoa.idPessoa) 
     navigate(`/atualizarPessoas/${pessoa.idPessoa}`)
   }
 
   const handleAddAddress = (pessoa) => {  
-    console.log(pessoa.idPessoa)
     navigate(`/endereco/${pessoa.idPessoa}`)
   }
   
@@ -64,9 +62,10 @@ const List = () => {
                   <Texto>{pessoa.nome}</Texto>
                   <Texto>{moment(pessoa.dataNascimento).locale('ptbr').format('ll')}</Texto>
                   <Buttons id={pessoa.idPessoa}>
-                      <Button backgroundColor='yellow' type="button" onClick={() => handleUpdate(pessoa)}>Atualizar</Button>
-                      <Button backgroundColor='orange' type="button" onClick={() => handleAddAddress(pessoa)}>Adicionar endereço</Button>
-                      <Button backgroundColor='red' type="button" onClick={() => openModal(pessoa.idPessoa)}>Excluir</Button>
+                      <FaSyncAlt onClick={() => handleUpdate(pessoa)}/>
+                      <FaHouseUser onClick={() => handleAddAddress(pessoa)}/>
+                      <FaAddressBook onClick={() => navigate(`/contatos/${pessoa.idPessoa}`)}/>
+                      <FaTrashAlt onClick={() => openModal(pessoa.idPessoa)}/>
                   </Buttons >
               </Lista>
           ))}

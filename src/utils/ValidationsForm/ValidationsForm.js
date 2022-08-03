@@ -62,3 +62,8 @@ export const validationCEP = async (event, formik) => {
     console.log(error)
   }
 }
+
+export const ValidationContact = Yup.object().shape({
+  tipoContato: Yup.string().required('Tipo obrigatório'),
+  telefone: Yup.string().min('14', 'Telefone inválido').required('telefone obrigatório'),
+})

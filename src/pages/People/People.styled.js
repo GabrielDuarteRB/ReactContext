@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Tela = styled.section `
-    background-color: #E5E5E5;;
+    background-color: #E5E5E5;
     display:grid ;
-    gap: 30px;
-    grid-template-columns: 255px auto ;
-    height: 100% ; 
+    grid-template-columns: 255px auto;
+    height: 100vh ; 
     padding-right: 32px;
     width: 100vw ;
     & > aside{
@@ -13,9 +12,15 @@ export const Tela = styled.section `
         position: fixed;
     }
     & > div:first-of-type {
-        position: absolute;
-        padding: 0 30px ;
+        background-color: #E5E5E5;
+        height: auto;
         left: 255px;
+        padding: 0 30px ;
+        position: absolute;
+        width: calc(100% - 255px) ;
+        & > button {
+            margin-top: 20px
+        }
     }
 `
 

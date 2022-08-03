@@ -17,6 +17,7 @@ export const customStyles = {
     backgroundColor: 'green',
     borderRadius: '5px',
     border: 'none',
+    cursor: 'pointer',
     height: '24px',
     width: '100px',
   },
@@ -24,6 +25,7 @@ export const customStyles = {
     backgroundColor: 'red',
     borderRadius: '5px',
     border: 'none',
+    cursor: 'pointer',
     height: '24px',
     width: '100px',
   }

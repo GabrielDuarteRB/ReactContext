@@ -38,7 +38,6 @@ const PeopleAddress = () => {
       <div>
         <ListAddress/>
       </div>
-      <ToastContainer />
     </Tela>
   )
 }

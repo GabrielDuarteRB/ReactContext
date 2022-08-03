@@ -81,17 +81,17 @@ const FormularioAddress = ({formik, funcao}) => {
           placeholder="estado"
           />
 
-        <label htmlFor='pais'>país*</label>
-        <Input
-        id="pais"
-        name="pais"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.pais}
-        placeholder="país"
-        />
+          <label htmlFor='pais'>país*</label>
+          <Input
+          id="pais"
+          name="pais"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.pais}
+          placeholder="país"
+          />
 
-        <Button width='100%' backgroundColor='green' type='submit'>{funcao === 'add' ? 'adicionar' : 'atualizar'}</Button>
+          <Button width='100%' backgroundColor='green' type='submit'>{funcao === 'add' ? 'adicionar' : 'atualizar'}</Button>
         </Campos>
 
       </Formulario>

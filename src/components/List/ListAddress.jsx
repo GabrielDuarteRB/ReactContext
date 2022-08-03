@@ -6,6 +6,7 @@ import { Button } from "../Button/Button";
 import { Lista, Texto, Legenda, Buttons, Pessoas } from "./List.styled";
 import { customStyles } from "../Modal/Modal";
 import { AddressContext } from "../../context/AddressContext";
+import { FaTrashAlt, FaSyncAlt } from "react-icons/fa";
 
 
 const ListAddress = () => {
@@ -67,8 +68,8 @@ const ListAddress = () => {
               <Texto>{endereco.logradouro}</Texto>
               <Texto>{endereco.numero}</Texto>
               <Buttons id={pessoa.idPessoa}>
-                <Button backgroundColor='yellow' onClick={() => handleUpdate(pessoa.idPessoa, endereco.idEndereco)} type="button">Atualizar</Button>
-                <Button backgroundColor='red' onClick={() => openModal(endereco.idEndereco)} type="button">Excluir</Button>
+                <FaSyncAlt onClick={() => handleUpdate(pessoa.idPessoa, endereco.idEndereco)} type="button">Atualizar</FaSyncAlt>
+                <FaTrashAlt backgroundColor='red' onClick={() => openModal(endereco.idEndereco)} type="button">Excluir</FaTrashAlt>
               </Buttons >
             </>
                 

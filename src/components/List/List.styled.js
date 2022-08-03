@@ -12,7 +12,7 @@ export const Lista = styled.li `
     border-top: 2px solid #DFE0EB;
     display: grid ;
     gap: 16px;
-    grid-template-columns: 1fr 1fr 1fr 3fr ;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
     padding: 26px;
     text-align: center;
     &  svg{

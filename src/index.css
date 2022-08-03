@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 
+#root {
+  overflow-x: none;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Mulish', sans-serif;
@@ -23,9 +27,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  overflow-x: none;
 }

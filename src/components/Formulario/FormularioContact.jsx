@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from "react"
 import { ContactContext } from "../../context/ContactContext"
 import Loading from "../../pages/Loading/Loading"
 import { useParams } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
 
 const FormularioContact = ({formik}) => {
 
@@ -31,17 +30,17 @@ const FormularioContact = ({formik}) => {
 
   useEffect(() => {
     if(idContato !== 'undefined') {
-        console.log(contato)
         const contatoPessoa = contato.filter(c => {
             return parseInt(c.idContato) === parseInt(idContato)
         })
+        console.log(contatoPessoa)
         formik.setFieldValue('tipoContato', contatoPessoa[0]?.tipoContato)
         formik.setFieldValue('telefone', contatoPessoa[0]?.telefone)
         formik.setFieldValue('descricao', contatoPessoa[0]?.descricao)
     }
   }, [contato])
 
-  if(idContato && contato.length === 0) {
+  if(idContato === 'undefined' && contato.length === 0) {
     return(
         <Loading/>
     )

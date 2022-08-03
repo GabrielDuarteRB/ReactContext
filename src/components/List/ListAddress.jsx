@@ -54,9 +54,9 @@ const ListAddress = () => {
   return (
       <Pessoas>
         <Lista>
-            <Legenda>name</Legenda>
-            <Legenda>Street</Legenda>
-            <Legenda>Number</Legenda>
+            <Legenda>Nome</Legenda>
+            <Legenda>Rua</Legenda>
+            <Legenda>Número</Legenda>
         </Lista>
         {enderecos.map((pessoa) => (
           pessoa.enderecos.length > 0

@@ -52,9 +52,9 @@ const List = () => {
     
       <Pessoas>
         <Lista>
-            <Legenda>Ticket details</Legenda>
-            <Legenda>Customer name</Legenda>
-            <Legenda>Date</Legenda>
+            <Legenda>Email</Legenda>
+            <Legenda>Nome</Legenda>
+            <Legenda>Data</Legenda>
         </Lista>
         {pessoas.map((pessoa) => (
           <Lista key={pessoa.idPessoa}>
